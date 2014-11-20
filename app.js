@@ -97,7 +97,8 @@ app.get('/:event', function(req,res){
 
 // Express web server
 
-var server = app.listen(3000, function () {
+var webport = process.env.PORT || 3000;
+var server = app.listen(webport, function () {
 
 	var host = server.address().address
 	var port = server.address().port
