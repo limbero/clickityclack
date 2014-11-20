@@ -1,34 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('increment').onclick = function () {
-		var xmlhttp = new XMLHttpRequest()
-		xmlhttp.onreadystatechange = function () {
-			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				var response = JSON.parse(xmlhttp.responseText)
-				console.log(response.count)
-				document.getElementById('count').textContent = response.count
-			}
-		}
-
-		xmlhttp.open('POST', eventid+'/increment')
-		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-		xmlhttp.send()
+		update(1)
 	}
 	document.getElementById('label').onclick = function () {
-		var xmlhttp = new XMLHttpRequest()
-		xmlhttp.onreadystatechange = function () {
-			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				var response = JSON.parse(xmlhttp.responseText)
-				console.log(response.count)
-				document.getElementById('count').textContent = response.count
-			}
-		}
-
-		xmlhttp.open('GET', eventid+'/get')
-		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-		xmlhttp.send()
+		update(0)
 	}
 	document.getElementById('decrement').onclick = function () {
-		var xmlhttp = new XMLHttpRequest()
+		update(-1)
+	}
+	refresh()
+})
+
+function update(type) {
+	var verb = 'GET'
+	var route = 'get'
+
+	if (type != 0) {
+		verb = 'POST'
+		if (type > 0)
+			route = 'increment'
+		else
+			route = 'decrement'
+	}
+
+	var xmlhttp = new XMLHttpRequest()
 		xmlhttp.onreadystatechange = function () {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 				var response = JSON.parse(xmlhttp.responseText)
@@ -37,8 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 
-		xmlhttp.open('POST', eventid+'/decrement')
+		xmlhttp.open(verb, eventid+'/'+route)
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
 		xmlhttp.send()
-	}
-})
+}
+
+function refresh() {
+    setTimeout(function () {
+        update(0)
+        refresh()
+    }, 1000)
+}

@@ -95,5 +95,5 @@ p#count {
 	font-family: 'Roboto Condensed';
 	font-size: 6em;
 	margin: 0;
-	cursor: default;
+	cursor: pointer;
 }
