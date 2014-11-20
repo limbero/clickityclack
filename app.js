@@ -50,9 +50,9 @@ app.post('/create', function(req,res){
 })
 
 // Get an event
-app.get('/get', function(req,res){
+app.get('/:event/get', function(req,res){
 	db.collection('events', function(err, collection) {
-		collection.findOne({_id:req.body.id}, function(err, item) {
+		collection.findOne({_id:req.params.event}, function(err, item) {
 			if(item === null)
 				res.json( { 'error': -1} )
 			else 
