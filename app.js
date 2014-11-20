@@ -1,12 +1,13 @@
 // Setup
 var express = require('express'),
-MongoClient = require('mongodb').MongoClient, assert = require('assert'),
-Db = require('mongodb').Db,
-Server = require('mongodb').Server,
-Connection = require('mongodb').Connection,  
-http = require('http'),
-debug = require('util').debug,
-inspect = require('util').inspect
+	MongoClient = require('mongodb').MongoClient,
+	assert = require('assert'),
+	Db = require('mongodb').Db,
+	Server = require('mongodb').Server,
+	Connection = require('mongodb').Connection,  
+	http = require('http'),
+	debug = require('util').debug,
+	inspect = require('util').inspect
 
 var app = express()
 
@@ -20,11 +21,20 @@ app.use(express.static(__dirname + '/public'))
 // MongoDB
 var host = 'localhost';
 var port = 27017;
-var db = new Db('clickityclack', new Server(host, port, {}), {native_parser:false});
+var mongourl = process.env.MONGOHQ_URL || 'mongodb://'+host+':'+port+'/clickityclack';
+var db;
 
-db.open(function(err, db) {
-	if(err) throw err  
+MongoClient.connect(mongourl, function(err, database) {
+  if(err) throw err;
+
+  db = database;
 });
+
+//var db = new Db('clickityclack', new Server(host, port, {}), {native_parser:false});
+
+/*db.open(function(err, db) {
+	if(err) throw err  
+});*/
 
 // Homepage
 app.get('/', function (req, res) {
