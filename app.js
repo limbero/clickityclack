@@ -53,7 +53,10 @@ app.post('/create', function(req,res){
 app.get('/get', function(req,res){
 	db.collection('events', function(err, collection) {
 		collection.findOne({_id:req.body.id}, function(err, item) {
-			res.json(item)
+			if(item === null)
+				res.json( { 'error': -1} )
+			else 
+				res.json(item)
 		})
 	})
 })
@@ -62,7 +65,9 @@ app.get('/get', function(req,res){
 app.post('/:event/increment', function(req,res){
 	db.collection('events', function(err, collection) {
 		collection.findOne({_id:req.params.event}, function(err, item) {
-			if(item.count < item.cap) {
+			if(item === null) {
+				res.json( { 'error': -1} )
+			} else if(item.count < item.cap) {
 				collection.update({_id:req.params.event}, {$inc:{count:1}}, function(err, numberOfUpdatedObjects) {
 					collection.findOne({_id:req.params.event}, function(err, item) {
 						res.json(item)
@@ -79,7 +84,9 @@ app.post('/:event/increment', function(req,res){
 app.post('/:event/decrement', function(req,res){
 	db.collection('events', function(err, collection) {
 		collection.findOne({_id:req.params.event}, function(err, item) {
-			if(item.count > 0) {
+			if(item === null) {
+				res.json( { 'error': -1} )
+			} else if(item.count > 0) {
 				collection.update({_id:req.params.event}, {$inc:{count:-1}}, function(err, numberOfUpdatedObjects) {
 					collection.findOne({_id:req.params.event}, function(err, item) {
 						res.json(item)
@@ -96,7 +103,10 @@ app.post('/:event/decrement', function(req,res){
 app.get('/:event', function(req,res){
 	db.collection('events', function(err, collection) {
 		collection.findOne({_id:req.params.event}, function(err, item) {
-			res.render('event', {item: item})
+			if(item === null)
+				res.json( { 'error': -1} )
+			else
+				res.render('event', {item: item})
 		})
 	})
 })

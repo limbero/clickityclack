@@ -52,3 +52,7 @@ section#index {
 
 	transition: all 0.15s;
 }
+
+p#count {
+	font-family: 'Roboto Condensed';
+}
