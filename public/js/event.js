@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 
-		xmlhttp.open('POST', 'increment')
+		xmlhttp.open('POST', eventid+'/increment')
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-		xmlhttp.send( JSON.stringify( {id: eventid} ) )
+		xmlhttp.send()
 	}
 	document.getElementById('decrement').onclick = function () {
 		var xmlhttp = new XMLHttpRequest()
@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 
-		xmlhttp.open('POST', 'decrement')
+		xmlhttp.open('POST', eventid+'decrement')
 		xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-		xmlhttp.send( JSON.stringify( {id: eventid} ) )
+		xmlhttp.send()
 	}
 })

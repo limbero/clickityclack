@@ -52,13 +52,22 @@ app.post('/create', function(req,res){
 	res.json(newEvent)
 })
 
-// Increment an event
-app.post('/increment', function(req,res){
+// Get an event
+app.get('/get', function(req,res){
 	db.collection('events', function(err, collection) {
 		collection.findOne({_id:req.body.id}, function(err, item) {
+			res.json(item)
+		})
+	})
+})
+
+// Increment an event
+app.post('/:event/increment', function(req,res){
+	db.collection('events', function(err, collection) {
+		collection.findOne({_id:req.params.event}, function(err, item) {
 			if(item.count < item.cap) {
-				collection.update({_id:req.body.id}, {$inc:{count:1}}, function(err, numberOfUpdatedObjects) {
-					collection.findOne({_id:req.body.id}, function(err, item) {
+				collection.update({_id:req.params.event}, {$inc:{count:1}}, function(err, numberOfUpdatedObjects) {
+					collection.findOne({_id:req.params.event}, function(err, item) {
 						res.json(item)
 					})
 				})
@@ -70,12 +79,12 @@ app.post('/increment', function(req,res){
 })
 
 // Decrement an event
-app.post('/decrement', function(req,res){
+app.post('/:event/decrement', function(req,res){
 	db.collection('events', function(err, collection) {
-		collection.findOne({_id:req.body.id}, function(err, item) {
+		collection.findOne({_id:req.params.event}, function(err, item) {
 			if(item.count > 0) {
-				collection.update({_id:req.body.id}, {$inc:{count:-1}}, function(err, numberOfUpdatedObjects) {
-					collection.findOne({_id:req.body.id}, function(err, item) {
+				collection.update({_id:req.params.event}, {$inc:{count:-1}}, function(err, numberOfUpdatedObjects) {
+					collection.findOne({_id:req.params.event}, function(err, item) {
 						res.json(item)
 					})
 				})
@@ -86,16 +95,7 @@ app.post('/decrement', function(req,res){
 	})
 })
 
-// Get an event
-app.get('/get', function(req,res){
-	db.collection('events', function(err, collection) {
-		collection.findOne({_id:req.body.id}, function(err, item) {
-			res.json(item)
-		})
-	})
-})
-
-// Access an event
+// View an event
 app.get('/:event', function(req,res){
 	db.collection('events', function(err, collection) {
 		collection.findOne({_id:req.params.event}, function(err, item) {
