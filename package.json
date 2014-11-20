@@ -1,11 +1,11 @@
 {
-	"name": "ClickityClack",
-	"version": "0.0.1",
-	"private": "true",
-	"dependencies": {
-		"express": "*",
-		"jade": "*",
-		"stylus": "*",
-		"nib": "*"
-	}
+  "name": "ClickityClack",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "express": "*",
+    "ejs": "*",
+    "mongodb": "~2.0",
+    "body-parser": "~1.9.2"
+  }
 }
