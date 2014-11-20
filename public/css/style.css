@@ -1,0 +1,33 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,700|Roboto+Condensed:700,300);
+
+body {
+	font-family: 'Roboto', 'Roboto Condensed';
+	font-size: 20px;
+	text-align: center;
+}
+
+section#index {
+	height: 100vh;
+}
+#index input:first-child {
+	margin-top: 30vh;
+}
+#index input {
+	font-size: 1.5em;
+	font-family: 'Roboto';
+	font-weight: 100;
+	text-align: center;
+
+	margin: 20px auto;
+
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #999;
+
+	transition: all 0.15s;
+}
+#index input:focus {
+	border-bottom: 1px solid #99F;
+
+	transition: all 0.15s;
+}

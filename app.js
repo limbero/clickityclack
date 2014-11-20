@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 
 // Create a new event
 app.post('/create', function(req,res){
-	var newEvent = {'_id': req.body.id, 'name': req.body.name, 'count': 0, 'cap': req.body.cap}
+	var newEvent = {'_id': randomString(), 'name': req.body.name, 'count': 0, 'cap': req.body.cap}
 
 	db.collection('events', function(err, collection) {
 		collection.insert(newEvent, {w:1}, function(err, result) {});
@@ -117,3 +117,12 @@ var server = app.listen(webport, function () {
 
 })
 
+// Additional functions
+
+function randomString() {
+	var length = 7
+	var chars = '0123456789abcdefghijklmnopqrstuvwxyz'
+	var result = ''
+	for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))]
+		return result
+}
