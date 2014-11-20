@@ -30,12 +30,6 @@ MongoClient.connect(mongourl, function(err, database) {
   db = database;
 });
 
-//var db = new Db('clickityclack', new Server(host, port, {}), {native_parser:false});
-
-/*db.open(function(err, db) {
-	if(err) throw err  
-});*/
-
 // Homepage
 app.get('/', function (req, res) {
 	res.render('index')
@@ -43,6 +37,9 @@ app.get('/', function (req, res) {
 
 // Create a new event
 app.post('/create', function(req,res){
+	if(isNaN(req.body.cap) || req.body.name == '')
+		return res.json( { 'error': -1} )
+
 	var newEvent = {'_id': randomString(), 'name': req.body.name, 'count': 0, 'cap': req.body.cap}
 
 	db.collection('events', function(err, collection) {
