@@ -28,6 +28,7 @@ function update(type) {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 				var response = JSON.parse(xmlhttp.responseText)
 				console.log(response.count)
+				
 				document.getElementById('count').textContent = response.count
 			}
 		}
@@ -42,4 +43,10 @@ function refresh() {
         update(0)
         refresh()
     }, 1000)
+}
+
+window.odometerOptions = {
+  auto: true,
+  format: '( ddd).dd', // Change how digit groups are formatted, and how many digits are shown after the decimal point
+  duration: 500, // Change how long the javascript expects the CSS animation to take
 }
