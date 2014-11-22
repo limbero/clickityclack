@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+	document.location.href = "clickityclack://"+eventid;
+
 	document.getElementById('increment').onclick = function () {
 		update(1)
 	}
