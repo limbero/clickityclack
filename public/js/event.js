@@ -50,10 +50,13 @@ function update(type) {
 			cur = parseInt(response.count)
 
 			if (guess != response.count) {
-				if (verb != "GET")
+				if (verb != "GET") {
 					document.getElementById('count').textContent = response.count
-				else
+				} else {
 					guess = response.count
+				}
+			} else {
+				document.getElementById('count').textContent = response.count
 			}
 		}
 	}
