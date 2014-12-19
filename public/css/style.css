@@ -61,7 +61,7 @@ p#maintext {
 /* EVENT PAGE */
 
 section#topbtn, section#botbtn {
-	height: 30vh;
+	height: 40vh;
 	position: relative;
 }
 #increment, #decrement {
@@ -74,8 +74,12 @@ section#topbtn, section#botbtn {
 	background: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+#increment:disabled, #decrement:disabled {
+	-webkit-filter: grayscale(100%);
+	        filter: grayscale(100%);
+}
 #increment {
-	margin-top: 10vh;
+	margin-top: 30vh;
 	bottom: 0;
 	background-image: url('../resources/increment.svg');
 	background-size: contain;
@@ -92,17 +96,18 @@ section#topbtn, section#botbtn {
 }
 
 section#label {
-	height: 40vh;
-	line-height: 40vh;
+	height: 20vh;
+	line-height: 20vh;
 	vertical-align: middle;
 }
 
 p#count {
-	font-family: 'Roboto Condensed';
-	font-size: 20vh;
+	/*font-family: 'Roboto Condensed';*/
+	font-weight: 100;
+	font-size: 12.5vh;
 	margin: 0;
 	cursor: pointer;
 
 	position: relative;
-	top: -20px;
+	top: 0px;
 }

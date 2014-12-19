@@ -7,13 +7,11 @@
 
 	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link rel="stylesheet" type="text/css" href="/css/odometer-theme-minimal.css">
 
 	<title><%= item.name %> | ClickityClack</title>
 
-	<script type="text/javascript">var eventid = '<%= item._id %>'; var prevcount = <%= item.count %></script>
+	<script type="text/javascript">var eventid = '<%= item._id %>'; var prevcount = <%= item.count %>; var cur = <%= item.count %>; var cap = <%= item.cap %></script>
 	<script type="text/javascript" src="/js/event.js"></script>
-	<script type="text/javascript" src="/js/odometer.js"></script>
 </head>
 <body>
 	<section id="topbtn">
