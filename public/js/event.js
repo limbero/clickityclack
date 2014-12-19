@@ -49,9 +49,12 @@ function update(type) {
 			cap = parseInt(response.cap)
 			cur = parseInt(response.count)
 
-			if (guess != response.count)
+			if (guess != response.count) {
 				if (verb != "GET")
 					document.getElementById('count').textContent = response.count
+				else
+					guess = response.count
+			}
 		}
 	}
 
