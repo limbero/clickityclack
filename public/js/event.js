@@ -19,10 +19,13 @@ function update(type) {
 
 	if (type != 0) {
 		verb = 'POST'
-		if (type > 0)
+		if (type > 0) {
 			route = 'increment'
-		else
+			document.getElementById('count').textContent = parseInt(document.getElementById('count').textContent)+1
+		} else {
 			route = 'decrement'
+			document.getElementById('count').textContent = parseInt(document.getElementById('count').textContent)-1
+		}
 	}
 
 	var xmlhttp = new XMLHttpRequest()
@@ -31,7 +34,10 @@ function update(type) {
 				var response = JSON.parse(xmlhttp.responseText)
 				console.log(response.count)
 				
-				document.getElementById('count').textContent = response.count
+				if (document.getElementById('count').textContent != response.count) {
+					console.log("Out of sync error.")
+					document.getElementById('count').textContent = response.count
+				}
 			}
 		}
 
