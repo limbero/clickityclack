@@ -21,15 +21,19 @@ function update(type) {
 	document.getElementById('increment').disabled = (cur >= cap)
 	document.getElementById('decrement').disabled = (cur <= 0)
 
+	var guess = cur
+
 	if (type != 0) {
 		verb = 'POST'
 		if (type > 0) {
 			route = 'increment'
+			guess++
 			document.getElementById('count').textContent = cur+1
 			document.getElementById('decrement').disabled = false
 			document.getElementById('increment').disabled = (cur+1 >= cap)
 		} else {
 			route = 'decrement'
+			guess--
 			document.getElementById('count').textContent = cur-1
 			document.getElementById('increment').disabled = false
 			document.getElementById('decrement').disabled = (cur-1 <= 0)
@@ -45,7 +49,7 @@ function update(type) {
 			cap = parseInt(response.cap)
 			cur = parseInt(response.count)
 
-			if (document.getElementById('count').textContent != response.count) {
+			if (guess != response.count) {
 				console.log("Out of sync error.")
 				document.getElementById('count').textContent = response.count
 			}
