@@ -50,7 +50,7 @@ function update(type) {
 			cur = parseInt(response.count)
 
 			if (guess != response.count) {
-				console.log("Out of sync error.")
+				console.log("Out of sync error. Guess was "+guess+" but response was "+response.count".")
 				document.getElementById('count').textContent = response.count
 			}
 		}
