@@ -75,6 +75,7 @@ section#topbtn, section#botbtn {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 #increment:disabled, #decrement:disabled {
+	opacity: 0.25;
 	-webkit-filter: grayscale(100%);
 	        filter: grayscale(100%);
 }
