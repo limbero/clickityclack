@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	update(0)
 })
 
+var guess
+
 function update(type) {
 	var verb = 'GET'
 	var route = 'get'
@@ -21,7 +23,7 @@ function update(type) {
 	document.getElementById('increment').disabled = (cur >= cap)
 	document.getElementById('decrement').disabled = (cur <= 0)
 
-	var guess = cur
+	guess = cur
 
 	if (type != 0) {
 		verb = 'POST'
