@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-	//document.location.href = "clickityclack://"+eventid;
+	
+	var userAgent = window.navigator.userAgent;
+	if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+		if(confirm("Would you like to open this event in the iOS app?")) {
+			document.location.href = "clickityclack://"+eventid;
+		}
+	}
 
 	document.getElementById('increment').onclick = function () {
 		update(1)
