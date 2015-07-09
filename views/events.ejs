@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+  <title>Events | ClickityClack</title>
+
+  <script type="text/javascript" src="/js/event.js"></script>
+</head>
+<body>
+  <a href="/create">New event</a>
+  <table>
+    <tr>
+      <th>Event</th>
+      <th>Count</th>
+      <th>Cap</th>
+      <th>Date</th>
+    </tr>
+    <% for(var i = 0; i < items.length; i++) {%>
+      <tr> 
+        <td>
+          <a href="<%= items[i]['_id'] %>">
+            <%= items[i]['name'] %>
+          </a>
+        </td>
+        <td><%= items[i]['count'] %></td>
+        <td><%= items[i]['cap'] %></td>
+      </tr>
+    <% } %>
+  </table>
+</body>
+</html>

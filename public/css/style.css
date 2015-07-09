@@ -112,3 +112,25 @@ p#count {
 	position: relative;
 	top: 0px;
 }
+
+table {
+	margin: .5em auto;
+	text-align: left;
+	border-collapse: separate;
+	border-spacing: 20px;
+}
+
+tr {
+	margin: 50px auto;
+}
+td:nth-child(1), th:nth-child(1) {
+	text-align: right;		
+}
+
+th {
+	padding: 0 25px;
+	font-weight: 500;
+}
+td {
+	padding: 0 25px;
+}

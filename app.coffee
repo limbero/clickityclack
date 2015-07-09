@@ -80,8 +80,15 @@ app.post '/:event/decrement', (request, response) ->
             response.json item
       else
         response.json item
+# view all events
+app.get '/events', (req, response) ->
+  db.collection 'events', (err, collection) ->
+    collection.find({}).toArray (err, items) ->
+      if items == null
+        response.json 'error': -1
       else
-        res.json item
+        items.reverse()
+        response.render 'events', items: items
 
 # View an event
 app.get '/:event', (req, response) ->
