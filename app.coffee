@@ -30,8 +30,11 @@ MongoClient.connect mongourl, (error, database) ->
   db = database
 
 # Homepage
-  res.render 'index'
 app.get '/', (request, response) ->
+  response.redirect '/events'
+
+app.get '/create', (request, response) ->
+  response.render 'create'
 
 # Create a new event
 app.post '/create', (request, response) ->
