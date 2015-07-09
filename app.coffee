@@ -81,6 +81,7 @@ app.post '/:event/decrement', (request, response) ->
             response.json item
       else
         response.json item
+
 # view all events
 app.get '/events', (req, response) ->
   db.collection 'events', (err, collection) ->
@@ -108,7 +109,6 @@ server = app.listen(webport, ->
   host = server.address().address
   port = server.address().port
   console.log 'ClickityClack listening at http://%s:%s', host, port
-  return
 )
 
 # Additional functions
