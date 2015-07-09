@@ -45,6 +45,7 @@ app.post '/create', (request, response) ->
     'name': request.body.name
     'count': 0
     'cap': request.body.cap
+    'date': new Date()
   db.collection 'events', (error, collection) ->
     collection.insert newEvent, { w: 1 }
   response.json newEvent

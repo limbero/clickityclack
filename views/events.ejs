@@ -30,6 +30,7 @@
         </td>
         <td><%= items[i]['count'] %></td>
         <td><%= items[i]['cap'] %></td>
+        <td><%= items[i]['date'].toDateString() == new Date().toDateString() ? "Today" : items[i]['date'].toDateString() %></td>
       </tr>
     <% } %>
   </table>
