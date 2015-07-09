@@ -134,3 +134,26 @@ th {
 td {
 	padding: 0 25px;
 }
+a {
+	color: #333;
+	position: relative;
+	text-decoration: none;
+	padding: 5px;
+}
+a:visited {
+	color: #333;
+}
+a:hover, a:active {
+	background: #66F;
+	color: #fefefe;
+}
+a::after {
+ content: "";
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  margin-top: 0.4em;
+  border-bottom: 5px solid #66F;
+}
