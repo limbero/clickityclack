@@ -14,6 +14,7 @@ app = express()
 
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: true)
+
 app.use express.static(__dirname + '/public')
 app.set 'view engine', 'ejs'
 
@@ -22,71 +23,74 @@ host = 'localhost'
 port = 27017
 mongourl = process.env.MONGOHQ_URL or 'mongodb://' + host + ':' + port + '/clickityclack'
 db = undefined
-MongoClient.connect mongourl, (err, database) ->
-  if err
-    throw err
+
+MongoClient.connect mongourl, (error, database) ->
+  if error
+    throw error
   db = database
 
 # Homepage
-app.get '/', (req, res) ->
   res.render 'index'
+app.get '/', (request, response) ->
 
 # Create a new event
-app.post '/create', (req, res) ->
-  if isNaN(req.body.cap) or req.body.name == ''
-    return res.json('error': -1)
+app.post '/create', (request, response) ->
+  if isNaN(request.body.cap) or request.body.name == ''
+    return response.json('error': -1)
   newEvent = 
     '_id': randomString()
-    'name': req.body.name
+    'name': request.body.name
     'count': 0
-    'cap': req.body.cap
-  db.collection 'events', (err, collection) ->
-    collection.insert newEvent, { w: 1 }, (err, result) ->
-  res.json newEvent
+    'cap': request.body.cap
+  db.collection 'events', (error, collection) ->
+    collection.insert newEvent, { w: 1 }
+  response.json newEvent
 
 # Get an event
-app.get '/:event/get', (req, res) ->
-  db.collection 'events', (err, collection) ->
-    collection.findOne { _id: req.params.event }, (err, item) ->
+app.get '/:event/get', (request, response) ->
+  db.collection 'events', (error, collection) ->
+    collection.findOne { _id: request.params.event }, (error, item) ->
       if item == null
-        res.json 'error': -1
+        response.json 'error': -1
       else
-        res.json item
+        response.json item
 
 # Increment an event
-app.post '/:event/increment', (req, res) ->
-  db.collection 'events', (err, collection) ->
-    collection.findOne { _id: req.params.event }, (err, item) ->
+app.post '/:event/increment', (request, response) ->
+  db.collection 'events', (error, collection) ->
+    collection.findOne { _id: request.params.event }, (error, item) ->
       if item == null
-        res.json 'error': -1
+        response.json 'error': -1
       else if item.count < item.cap
-        collection.update { _id: req.params.event }, { $inc: count: 1 }, (err, numberOfUpdatedObjects) ->
-          collection.findOne { _id: req.params.event }, (err, item) ->
-            res.json item
+        collection.update { _id: request.params.event }, { $inc: count: 1 }, (error, numberOfUpdatedObjects) ->
+          collection.findOne { _id: request.params.event }, (error, item) ->
+            response.json item
       else
-        res.json item
+        response.json item
 
 # Decrement an event
-app.post '/:event/decrement', (req, res) ->
+app.post '/:event/decrement', (request, response) ->
   db.collection 'events', (err, collection) ->
-    collection.findOne { _id: req.params.event }, (err, item) ->
+    collection.findOne { _id: request.params.event }, (err, item) ->
       if item == null
-        res.json 'error': -1
+        response.json 'error': -1
       else if item.count > 0
-        collection.update { _id: req.params.event }, { $inc: count: -1 }, (err, numberOfUpdatedObjects) ->
-          collection.findOne { _id: req.params.event }, (err, item) ->
-            res.json item
+        collection.update { _id: request.params.event }, { $inc: count: -1 }, (err, numberOfUpdatedObjects) ->
+          collection.findOne { _id: request.params.event }, (err, item) ->
+            response.json item
+      else
+        response.json item
       else
         res.json item
 
 # View an event
-app.get '/:event', (req, res) ->
+app.get '/:event', (req, response) ->
   db.collection 'events', (err, collection) ->
     collection.findOne { _id: req.params.event }, (err, item) ->
       if item == null
-        res.json 'error': -1
+        response.json 'error': -1
       else
-        res.render 'event', item: item
+        response.render 'event', item: item
 
 # Express web server
 webport = process.env.PORT or 3000
