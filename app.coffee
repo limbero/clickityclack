@@ -21,7 +21,7 @@ app.set 'view engine', 'ejs'
 # MongoDB
 host = 'localhost'
 port = 27017
-mongourl = process.env.MONGOHQ_URL or 'mongodb://' + host + ':' + port + '/clickityclack'
+mongourl = process.env.MONGOHQ_URL or process.env.MONGODB_URL or 'mongodb://' + host + ':' + port + '/clickityclack'
 db = undefined
 
 MongoClient.connect mongourl, (error, database) ->
