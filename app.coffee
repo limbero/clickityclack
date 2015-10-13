@@ -30,14 +30,14 @@ MongoClient.connect mongourl, (error, database) ->
   db = database
 
 # Homepage
-  res.render 'index'
 app.get '/', (request, response) ->
+  response.render 'index'
 
 # Create a new event
 app.post '/create', (request, response) ->
   if isNaN(request.body.cap) or request.body.name == ''
     return response.json('error': -1)
-  newEvent = 
+  newEvent =
     '_id': randomString()
     'name': request.body.name
     'count': 0
@@ -71,21 +71,21 @@ app.post '/:event/increment', (request, response) ->
 
 # Decrement an event
 app.post '/:event/decrement', (request, response) ->
-  db.collection 'events', (err, collection) ->
-    collection.findOne { _id: request.params.event }, (err, item) ->
+  db.collection 'events', (error, collection) ->
+    collection.findOne { _id: request.params.event }, (error, item) ->
       if item == null
         response.json 'error': -1
       else if item.count > 0
-        collection.update { _id: request.params.event }, { $inc: count: -1 }, (err, numberOfUpdatedObjects) ->
-          collection.findOne { _id: request.params.event }, (err, item) ->
+        collection.update { _id: request.params.event }, { $inc: count: -1 }, (error, numberOfUpdatedObjects) ->
+          collection.findOne { _id: request.params.event }, (error, item) ->
             response.json item
       else
         response.json item
 
 # view all events
-app.get '/events', (req, response) ->
-  db.collection 'events', (err, collection) ->
-    collection.find({}).toArray (err, items) ->
+app.get '/events', (request, response) ->
+  db.collection 'events', (error, collection) ->
+    collection.find({}).toArray (error, items) ->
       if items == null
         response.json 'error': -1
       else
@@ -93,9 +93,9 @@ app.get '/events', (req, response) ->
         response.render 'events', items: items
 
 # View an event
-app.get '/:event', (req, response) ->
-  db.collection 'events', (err, collection) ->
-    collection.findOne { _id: req.params.event }, (err, item) ->
+app.get '/:event', (request, response) ->
+  db.collection 'events', (error, collection) ->
+    collection.findOne { _id: request.params.event }, (error, item) ->
       if item == null
         response.json 'error': -1
       else
