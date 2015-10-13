@@ -22,12 +22,8 @@
       <th>Date</th>
     </tr>
     <% for(var i = 0; i < items.length; i++) {%>
-      <tr> 
-        <td>
-          <a href="<%= items[i]['_id'] %>">
-            <%= items[i]['name'] %>
-          </a>
-        </td>
+      <tr>
+        <td><%= items[i]['name'] %></td>
         <td><%= items[i]['count'] %></td>
         <td><%= items[i]['cap'] %></td>
         <td><%= items[i]['date'].toDateString() == new Date().toDateString() ? "Today" : items[i]['date'].toDateString() %></td>
