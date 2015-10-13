@@ -59,6 +59,9 @@ p#maintext {
 }
 
 /* EVENT PAGE */
+section#botbtn {
+	/*background: red;*/
+}
 
 section#topbtn, section#botbtn {
 	height: 40vh;
@@ -67,7 +70,7 @@ section#topbtn, section#botbtn {
 #increment, #decrement {
 	display: block;
 	position: absolute;
-	height: 20vh;
+	height: 40vh;
 	width: 100%;
 	outline: none;
 	border: none;
@@ -82,15 +85,33 @@ section#topbtn, section#botbtn {
 #increment {
 	margin-top: 30vh;
 	bottom: 0;
-	background-image: url('../resources/increment.svg');
+/*	background-image: url('../resources/increment.svg');
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: center center;*/
 }
 #decrement {
 	margin-bottom: 10vh;
 	top: 0;
+/*	background-image: url('../resources/decrement.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;*/
+}
+
+#top-image {
+	margin-top: 20vh;
+	background-image: url('../resources/increment.svg');
+}
+
+#bottom-image {
+	margin-bottom: 20vh;
 	background-image: url('../resources/decrement.svg');
+}
+
+#top-image, #bottom-image {
+	width: 100%;
+	height: 50%;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -111,4 +132,53 @@ p#count {
 
 	position: relative;
 	top: 0px;
+}
+
+table {
+	margin: .5em auto;
+	text-align: left;
+	border-collapse: separate;
+	border-spacing: 20px;
+}
+
+tr {
+	margin: 50px auto;
+}
+td:nth-child(1), th:nth-child(1) {
+	text-align: right;
+}
+
+th {
+	padding: 0 25px;
+	font-weight: 500;
+}
+td {
+	padding: 0 25px;
+}
+a {
+	color: #333;
+	position: relative;
+	text-decoration: none;
+	padding: 5px;
+}
+a:visited {
+	color: #333;
+}
+a:hover, a:active {
+	background: #66F;
+	color: #fefefe;
+}
+a::after {
+ content: "";
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  margin-top: 0.4em;
+  border-bottom: 5px solid #66F;
+}
+
+::selection {
+	display: none;
 }
